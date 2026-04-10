@@ -1,0 +1,403 @@
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Разработка системы мотивации — сильное предложение</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:#09111f;
+      --bg2:#0f1830;
+      --card:rgba(255,255,255,0.07);
+      --card2:rgba(255,255,255,0.1);
+      --line:rgba(255,255,255,0.1);
+      --text:#f5f7ff;
+      --muted:#b9c2df;
+      --accent:#7d5cff;
+      --accent2:#18c3ff;
+      --green:#31d198;
+      --red:#ff7f7f;
+      --shadow:0 18px 50px rgba(0,0,0,0.35);
+      --radius:24px;
+      --radius2:18px;
+      --max:1160px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:'Inter',system-ui,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 0% 0%, rgba(125,92,255,.24), transparent 28%),
+        radial-gradient(circle at 100% 10%, rgba(24,195,255,.16), transparent 24%),
+        linear-gradient(180deg,var(--bg) 0%,var(--bg2) 100%);
+      overflow-x:hidden;
+    }
+    a{text-decoration:none;color:inherit}
+    .container{width:min(var(--max),calc(100% - 28px));margin:0 auto}
+    .nav{
+      position:sticky;top:0;z-index:50;
+      backdrop-filter:blur(14px);
+      background:rgba(9,17,31,.76);
+      border-bottom:1px solid rgba(255,255,255,.07);
+    }
+    .nav-wrap{display:flex;justify-content:space-between;align-items:center;padding:12px 0;gap:16px}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:800}
+    .brand-mark{
+      width:40px;height:40px;border-radius:14px;
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+      display:grid;place-items:center;font-weight:900;
+      box-shadow:0 10px 25px rgba(125,92,255,.35)
+    }
+    .nav-links{display:flex;gap:18px;flex-wrap:wrap;color:var(--muted);font-size:14px}
+    .hero{padding:56px 0 26px}
+    .hero-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:22px;align-items:center}
+    .eyebrow{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:10px 14px;border-radius:999px;
+      background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);
+      font-size:13px;color:#dfe6ff;margin-bottom:16px
+    }
+    .dot{width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,var(--green),var(--accent2))}
+    h1{font-size:clamp(34px,6vw,66px);line-height:.94;letter-spacing:-.055em;margin:0 0 18px}
+    .gradient{
+      background:linear-gradient(90deg,#fff 0%,#b9c5ff 35%,#7d5cff 72%,#18c3ff 100%);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;color:transparent
+    }
+    .lead{font-size:18px;color:var(--muted);max-width:760px;margin:0 0 22px}
+    .cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:10px;
+      padding:15px 20px;border-radius:16px;font-weight:800;
+      transition:.25s ease;border:1px solid transparent;position:relative;overflow:hidden
+    }
+    .btn::after{
+      content:"";position:absolute;inset:0;transform:translateX(-120%);
+      background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);
+      transition:.55s ease;
+    }
+    .btn:hover{transform:translateY(-2px) scale(1.01)}
+    .btn:hover::after{transform:translateX(120%)}
+    .btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent2));box-shadow:0 18px 40px rgba(125,92,255,.3)}
+    .btn-secondary{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.11)}
+    .proof{display:flex;gap:10px;flex-wrap:wrap}
+    .proof span{padding:9px 12px;border-radius:999px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);color:var(--muted);font-size:13px}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+    .hero-side{padding:22px;position:relative;overflow:hidden}
+    .hero-side::before{content:"";position:absolute;right:-90px;bottom:-90px;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle,rgba(125,92,255,.25),transparent 70%)}
+    .offer-top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:18px}
+    .badge{display:inline-block;padding:8px 11px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.08);font-size:12px;font-weight:800;letter-spacing:.05em;text-transform:uppercase}
+    .timer{padding:12px 14px;border-radius:16px;background:rgba(255,122,122,.1);border:1px solid rgba(255,127,127,.2);min-width:170px}
+    .timer small{display:block;color:#ffd1d1;margin-bottom:6px}
+    .timer b{font-size:20px;letter-spacing:-.04em}
+    .mini-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+    .mini{padding:16px;border-radius:18px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08)}
+    .mini b{display:block;font-size:24px;margin-bottom:5px}
+    .mini span{color:var(--muted);font-size:13px}
+    .super-offer{margin-top:16px;padding:18px;border-radius:20px;background:linear-gradient(135deg,rgba(49,209,152,.15),rgba(24,195,255,.14));border:1px solid rgba(255,255,255,.13)}
+    .super-offer h3{margin:0 0 10px;font-size:24px;line-height:1;letter-spacing:-.04em}
+    .super-offer p{margin:0;color:#e8f2ff}
+    .section{padding:28px 0}
+    .section-title{font-size:clamp(28px,4vw,44px);line-height:1;letter-spacing:-.05em;margin:0 0 12px}
+    .section-lead{margin:0 0 22px;color:var(--muted);font-size:17px;max-width:800px}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+    .box{padding:22px}
+    .box h3{margin:0 0 10px;font-size:22px;letter-spacing:-.03em}
+    .box p,.box li{color:var(--muted)}
+    .box ul{margin:0;padding-left:18px;display:grid;gap:7px}
+    .image-card{padding:0;overflow:hidden;position:relative;min-height:260px}
+    .image-card svg{width:100%;height:100%;display:block}
+    .img-caption{position:absolute;left:18px;bottom:18px;right:18px;padding:14px 16px;border-radius:16px;background:rgba(9,17,31,.72);border:1px solid rgba(255,255,255,.08);backdrop-filter:blur(8px)}
+    .img-caption b{display:block;margin-bottom:6px}
+    .dash{padding:22px}
+    .dash-head{display:flex;justify-content:space-between;gap:12px;align-items:end;margin-bottom:16px}
+    .dash-head h3{margin:0;font-size:24px;letter-spacing:-.04em}
+    .dash-head span{color:var(--muted);font-size:14px}
+    .stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}
+    .stat{padding:16px;border-radius:18px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08)}
+    .stat b{display:block;font-size:28px;letter-spacing:-.04em}
+    .stat small{color:var(--muted)}
+    .bars{display:grid;gap:12px}
+    .bar-row{display:grid;grid-template-columns:90px 1fr 72px;gap:12px;align-items:center}
+    .bar-label{color:#e4ebff;font-size:14px}
+    .bar-track{height:14px;border-radius:999px;background:rgba(255,255,255,.06);overflow:hidden;position:relative}
+    .bar-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent2));animation:grow 1.3s ease forwards;transform-origin:left center}
+    .bar-fill.before{background:linear-gradient(90deg,#7e8aa6,#aab4cd)}
+    .bar-val{font-size:14px;color:var(--muted);text-align:right}
+    @keyframes grow{from{transform:scaleX(.18)}to{transform:scaleX(1)}}
+    .compare-wrap{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .compare-card{padding:22px}
+    .compare-card h3{margin:0 0 10px;font-size:24px}
+    .compare-card ul{margin:0;padding-left:18px;display:grid;gap:8px}
+    .compare-card li{color:var(--muted)}
+    .simple-band{padding:22px;border-radius:24px;background:linear-gradient(135deg,rgba(125,92,255,.14),rgba(24,195,255,.12));border:1px solid rgba(255,255,255,.12)}
+    .simple-band h3{margin:0 0 10px;font-size:30px;line-height:1;letter-spacing:-.05em}
+    .simple-band p{margin:0;color:#e7efff;font-size:17px}
+    .cta-final{padding:28px;text-align:center}
+    .cta-final h2{margin:0 0 12px;font-size:clamp(30px,5vw,54px);line-height:.95;letter-spacing:-.055em}
+    .cta-final p{margin:0 auto 20px;max-width:820px;color:var(--muted);font-size:18px}
+    .footer{padding:20px 0 46px;color:var(--muted);font-size:13px}
+    .footer-wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,.08);padding-top:18px}
+    @media (max-width: 980px){
+      .hero-grid,.grid-3,.grid-2,.compare-wrap,.stat-grid{grid-template-columns:1fr}
+      .hero{padding-top:34px}
+    }
+    @media (max-width: 760px){
+      .nav-wrap{align-items:flex-start}
+      .nav-links{font-size:13px;gap:10px}
+      .cta-row{flex-direction:column}
+      .btn{width:100%}
+      .offer-top{flex-direction:column}
+      .timer{width:100%}
+      .bar-row{grid-template-columns:78px 1fr 55px;gap:8px}
+      .container{width:min(var(--max),calc(100% - 18px))}
+      .box,.dash,.compare-card,.hero-side,.cta-final{padding:18px}
+      .image-card{min-height:220px}
+      .section{padding:22px 0}
+      .lead{font-size:16px}
+      .section-lead{font-size:16px}
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="container nav-wrap">
+      <div class="brand">
+        <div class="brand-mark">M</div>
+        <div>Система мотивации<br><span style="font-size:12px;color:var(--muted);font-weight:600">рост прибыли без лишней сложности</span></div>
+      </div>
+      <div class="nav-links">
+        <a href="#solution">Решение</a>
+        <a href="#offer">Что входит</a>
+        <a href="#results">Результат</a>
+        <a href="#cta">Оставить заявку</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="eyebrow"><span class="dot"></span> Универсально для любой ниши с акцентом на финансы</div>
+        <h1>Разработка <span class="gradient">системы мотивации</span>, которая помогает зарабатывать больше и внедряется проще, чем кажется</h1>
+        <p class="lead">Мы создаём понятную систему KPI, бонусов и финансовой логики для малого и среднего бизнеса. Без перегруженных схем. Без хаоса в расчётах. Без ощущения, что это невозможно внедрить.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#cta">Получить предложение</a>
+          <a class="btn btn-secondary" href="#results">Посмотреть эффект</a>
+        </div>
+        <div class="proof">
+          <span>Простая логика</span>
+          <span>Привязка к прибыли</span>
+          <span>Подходит для любой команды</span>
+          <span>Запуск за 3–4 недели</span>
+        </div>
+      </div>
+
+      <div class="card hero-side">
+        <div class="offer-top">
+          <div>
+            <div class="badge">Предложение без риска</div>
+            <h2 style="margin:12px 0 8px;font-size:32px;line-height:1;letter-spacing:-.05em">Тестовый проект бесплатно</h2>
+            <p style="margin:0;color:var(--muted)">Если результат и подход вас не устроят — мы платим <b style="color:#fff">10 000 ₽</b> за аргументированный отказ. Мы уверены в ценности предложения и считаем качественную обратную связь частью работы на 100% результат.</p>
+          </div>
+          <div class="timer">
+            <small>Решение по спецусловию</small>
+            <b>до 7 дней</b>
+          </div>
+        </div>
+
+        <div class="mini-grid">
+          <div class="mini"><b>+ прибыль</b><span>мотивация завязана на реальные деньги</span></div>
+          <div class="mini"><b>+ ясность</b><span>каждый понимает, за что получает бонус</span></div>
+          <div class="mini"><b>– хаос</b><span>убираем спорные и ручные расчёты</span></div>
+          <div class="mini"><b>+ внедрение</b><span>делаем процесс проще, чем он кажется</span></div>
+        </div>
+
+        <div class="super-offer">
+          <h3>Почему мы даём такую гарантию</h3>
+          <p>Потому что сильная система мотивации всегда даёт бизнесу одну вещь — понятный путь к росту прибыли. А если вы не увидите этой ценности, ваша обратная связь для нас важнее, чем попытка любой ценой “продать проект”.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="solution">
+    <div class="container">
+      <h2 class="section-title">Что именно вы получите</h2>
+      <p class="section-lead">Не просто KPI-таблицу, а целую систему: кто за что отвечает, как считается премия, где деньги, как это проверяется и как всё внедрить без перегруза команды.</p>
+      <div class="grid-3">
+        <div class="card box">
+          <div class="badge">01</div>
+          <h3>Аудит и диагностика</h3>
+          <p>Разбираем текущую мотивацию, находим слабые места, финансовые потери и точки, где можно усилить прибыль без лишнего роста ФОТ.</p>
+        </div>
+        <div class="card box">
+          <div class="badge">02</div>
+          <h3>Разработка модели</h3>
+          <p>Собираем KPI, бонусы, коридоры, финансовую логику и понятные правила, которые можно объяснить команде без долгих лекций.</p>
+        </div>
+        <div class="card box">
+          <div class="badge">03</div>
+          <h3>Калькулятор и внедрение</h3>
+          <p>Даём расчёты, шаблоны, отчётность и сценарий запуска, чтобы система не осталась “красивой идеей”, а реально заработала.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container grid-3">
+      <div class="card image-card">
+        <svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#7d5cff"/>
+              <stop offset="100%" stop-color="#18c3ff"/>
+            </linearGradient>
+          </defs>
+          <rect width="600" height="400" fill="#101933"/>
+          <circle cx="110" cy="80" r="90" fill="rgba(125,92,255,.18)"/>
+          <circle cx="500" cy="320" r="120" fill="rgba(24,195,255,.14)"/>
+          <rect x="60" y="70" width="480" height="260" rx="24" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.12)"/>
+          <rect x="92" y="110" width="110" height="150" rx="18" fill="url(#g1)"/>
+          <rect x="220" y="150" width="110" height="110" rx="18" fill="rgba(255,255,255,.22)"/>
+          <rect x="348" y="130" width="110" height="130" rx="18" fill="rgba(255,255,255,.14)"/>
+          <rect x="476" y="95" width="34" height="165" rx="16" fill="#31d198"/>
+          <path d="M95 295 C180 240 220 280 285 210 S420 140 505 95" fill="none" stroke="#31d198" stroke-width="8" stroke-linecap="round"/>
+        </svg>
+        <div class="img-caption"><b>Рост показателей</b><span style="color:var(--muted)">Сильная мотивация переводит усилия команды в измеримый финансовый результат.</span></div>
+      </div>
+
+      <div class="card image-card">
+        <svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+          <rect width="600" height="400" fill="#0f1730"/>
+          <rect x="70" y="58" width="460" height="284" rx="30" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.11)"/>
+          <rect x="110" y="100" width="150" height="200" rx="22" fill="rgba(255,255,255,.09)"/>
+          <rect x="282" y="100" width="208" height="60" rx="20" fill="#7d5cff" opacity=".9"/>
+          <rect x="282" y="178" width="208" height="40" rx="20" fill="#18c3ff" opacity=".75"/>
+          <rect x="282" y="236" width="160" height="40" rx="20" fill="#31d198" opacity=".75"/>
+          <circle cx="185" cy="150" r="36" fill="#18c3ff"/>
+          <path d="M145 248 C145 212 225 212 225 248" stroke="#7d5cff" stroke-width="18" stroke-linecap="round" fill="none"/>
+          <circle cx="465" cy="88" r="42" fill="rgba(125,92,255,.18)"/>
+        </svg>
+        <div class="img-caption"><b>Прозрачность для команды</b><span style="color:var(--muted)">Когда правила понятны, сотрудники быстрее принимают новую систему и начинают играть на результат.</span></div>
+      </div>
+
+      <div class="card image-card">
+        <svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+          <rect width="600" height="400" fill="#0d162b"/>
+          <circle cx="90" cy="315" r="70" fill="rgba(49,209,152,.16)"/>
+          <circle cx="535" cy="82" r="80" fill="rgba(24,195,255,.12)"/>
+          <rect x="90" y="70" width="420" height="260" rx="28" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.12)"/>
+          <rect x="130" y="115" width="340" height="30" rx="15" fill="rgba(255,255,255,.08)"/>
+          <rect x="130" y="165" width="260" height="26" rx="13" fill="#7d5cff"/>
+          <rect x="130" y="208" width="305" height="26" rx="13" fill="#18c3ff"/>
+          <rect x="130" y="251" width="220" height="26" rx="13" fill="#31d198"/>
+          <rect x="412" y="160" width="58" height="124" rx="22" fill="rgba(255,255,255,.09)"/>
+          <rect x="427" y="190" width="28" height="78" rx="14" fill="#31d198"/>
+        </svg>
+        <div class="img-caption"><b>Внедрение без перегруза</b><span style="color:var(--muted)">Процесс не выглядит сложным, когда есть чёткая логика, роли и понятный план запуска.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="results">
+    <div class="container grid-2">
+      <div class="card dash">
+        <div class="dash-head">
+          <h3>До внедрения</h3>
+          <span>типичная картина без системы</span>
+        </div>
+        <div class="stat-grid">
+          <div class="stat"><b>180</b><small>средний чек</small></div>
+          <div class="stat"><b>25%</b><small>ФОТ от выручки</small></div>
+          <div class="stat"><b>1.6 млн</b><small>операционная прибыль</small></div>
+        </div>
+        <div class="bars">
+          <div class="bar-row"><div class="bar-label">Чек</div><div class="bar-track"><div class="bar-fill before" style="width:58%"></div></div><div class="bar-val">180</div></div>
+          <div class="bar-row"><div class="bar-label">Допродажи</div><div class="bar-track"><div class="bar-fill before" style="width:34%"></div></div><div class="bar-val">низко</div></div>
+          <div class="bar-row"><div class="bar-label">Управляемость</div><div class="bar-track"><div class="bar-fill before" style="width:42%"></div></div><div class="bar-val">слабо</div></div>
+        </div>
+      </div>
+
+      <div class="card dash">
+        <div class="dash-head">
+          <h3>После внедрения</h3>
+          <span>пример ожидаемого усиления</span>
+        </div>
+        <div class="stat-grid">
+          <div class="stat"><b>200+</b><small>средний чек</small></div>
+          <div class="stat"><b>в норме</b><small>ФОТ под контролем</small></div>
+          <div class="stat"><b>+30–60%</b><small>потенциал роста прибыли</small></div>
+        </div>
+        <div class="bars">
+          <div class="bar-row"><div class="bar-label">Чек</div><div class="bar-track"><div class="bar-fill" style="width:78%"></div></div><div class="bar-val">200+</div></div>
+          <div class="bar-row"><div class="bar-label">Допродажи</div><div class="bar-track"><div class="bar-fill" style="width:72%"></div></div><div class="bar-val">рост</div></div>
+          <div class="bar-row"><div class="bar-label">Управляемость</div><div class="bar-track"><div class="bar-fill" style="width:82%"></div></div><div class="bar-val">сильно</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="offer">
+    <div class="container compare-wrap">
+      <div class="card compare-card">
+        <div class="badge">Что входит</div>
+        <h3>Полный пакет услуги</h3>
+        <ul>
+          <li>аудит текущей мотивации и финансовой логики</li>
+          <li>разработка KPI и бонусной модели по ролям</li>
+          <li>финансовый калькулятор и сценарии выплат</li>
+          <li>регламенты, отчёты и правила контроля</li>
+          <li>внедрение и обучение команды</li>
+        </ul>
+      </div>
+      <div class="card compare-card">
+        <div class="badge">Почему решение сильное</div>
+        <h3>Ключевые преимущества</h3>
+        <ul>
+          <li>подходит для любой ниши</li>
+          <li>говорит с бизнесом на языке денег</li>
+          <li>не перегружает сотрудников сложностью</li>
+          <li>делает результат проверяемым</li>
+          <li>помогает расти без хаотичных экспериментов</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="simple-band">
+        <h3>Это проще, чем кажется</h3>
+        <p>Большинство компаний откладывают проект мотивации, потому что думают, что это долго, тяжело и слишком сложно. На практике сложность появляется только тогда, когда система изначально построена неправильно. Наша задача — убрать лишнее и оставить понятную работающую модель.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="cta">
+    <div class="container">
+      <div class="card cta-final">
+        <div class="badge">Ограниченное предложение</div>
+        <h2>Бесплатный тестовый проект + 10 000 ₽ за аргументированный отказ</h2>
+        <p>Спецусловие действует только для тех, кто принимает решение в течение 7 дней после первого контакта. Это сделано не ради давления, а чтобы мы брали в работу ограниченное число проектов и давали максимум внимания каждому бизнесу.</p>
+        <div class="cta-row" style="justify-content:center;margin-bottom:0">
+          <a class="btn btn-primary" href="mailto:hello@example.com">Оставить заявку сейчас</a>
+          <a class="btn btn-secondary" href="tel:+70000000000">Обсудить задачу</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-wrap">
+      <div>Услуга адаптируется под ваш бренд, нишу, структуру компании и формат продаж.</div>
+      <div>Можно быстро встроить кейсы, контакты, форму заявки и реальные цифры вашей компании.</div>
+    </div>
+  </footer>
+</body>
+</html>
